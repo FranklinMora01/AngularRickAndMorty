@@ -1,0 +1,52 @@
+<div class="container overflow-hidden text-center">
+    <div class="row gy-5">
+        
+            <div class="card mb-2 col-xs-12 col-sm-4 col-md-3" *ngFor="let persona of personas">
+                <img [src]="persona.image" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ persona.name }}</h5>
+                </div>
+                 <!-- <a [routerLink]="['/modal', persona.id]" class="btn btn-primary">Load More</a> -->
+                 <button class="btn btn-primary" (click)="openModal(persona)">Load More</button>
+            </div>
+
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">                 
+                        <li class="page-item" ><a class="page-link" (click)="decrementarVector(indice-1)">Previous</a></li>
+                        <li class="page-item" *ngFor="let pagina of paginas"><a class="page-link" (click)="cambiarPagina(pagina)">{{ pagina }}</a></li>
+                        <li class="page-item"><a class="page-link" (click)="incrementarVector(indice+1)">Next</a></li>   
+                </ul>
+              </nav>
+
+    </div>
+    
+</div>
+
+<!-- Modal -->
+<div class="modal fade" [ngClass]="{'show': modalVisible}" [style.display]="modalVisible ? 'block' : 'none'" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ selectedPersona?.name }}</h5>
+                <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img [src]="selectedPersona?.image" class="img-fluid" alt="...">
+                <p>Status: {{ selectedPersona?.status }}</p>
+                <p>Species: {{ selectedPersona?.species }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal backdrop -->
+<div class="modal-backdrop fade show" *ngIf="modalVisible"></div>
+ 
+
+
+<!-- <pre>{{ personas | json}}</pre> -->
+
