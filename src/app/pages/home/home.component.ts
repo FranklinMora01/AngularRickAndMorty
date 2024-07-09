@@ -9,7 +9,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,ModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit{
   public indice:number =1;
   public selectedPersona: Result | null = null;
   public modalVisible: boolean = false;
+  public personaSeleccionadaHome: Result | null = null;
 
   constructor(private dataService: DataService) {}
 
@@ -52,15 +53,8 @@ export class HomeComponent implements OnInit{
   }
 
  
-  openModal(persona: Result): void {
-    console.log('Opening modal for:', persona.name);
-    this.selectedPersona = persona;
-    this.modalVisible = true;
-  }
-
-  closeModal(): void {
-    console.log('Closing modal');
-    this.modalVisible = false;
+  abrirModal(persona: Result): void {
+    this.personaSeleccionadaHome = persona;
   }
 
 }

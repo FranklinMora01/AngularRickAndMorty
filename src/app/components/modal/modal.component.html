@@ -1,23 +1,31 @@
-<!-- Botón para abrir el modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Abrir modal
-</button>
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Título del modal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Contenido del modal
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar cambios</button>
+ <div class="modal fade" id="personaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ personaSeleccionadaModal?.name }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+      
+          <div class="row justify-content-around">
+            <div class="col">
+              <h5>Estatus: {{ personaSeleccionadaModal?.status }}</h5>
+              <h5>Especies: {{ personaSeleccionadaModal?.species }}</h5>
+              <h5>Gender: {{ personaSeleccionadaModal?.gender }}</h5>
+              <h5>Origin: {{ personaSeleccionadaModal?.origin?.name }}</h5>
+              <h5>Location: {{ personaSeleccionadaModal?.location?.name }}</h5>
+            </div>
+            <div class="col">
+              <img [src]="personaSeleccionadaModal?.image" alt="">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          
+        </div>
       </div>
     </div>
   </div>
-</div>
