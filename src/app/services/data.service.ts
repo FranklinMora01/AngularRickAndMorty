@@ -17,4 +17,9 @@ export class DataService {
   getPagina(id: number): Observable<Ipersonas>{
     return this.http.get<Ipersonas>(`https://rickandmortyapi.com/api/character/?page=${id}`);
   }
+
+  getPersonasPorNombres(name: string): Observable<Ipersonas>{
+    return this.http.get<Ipersonas>(`https://rickandmortyapi.com/api/character/?name=${name}`);
+  }
+
 }

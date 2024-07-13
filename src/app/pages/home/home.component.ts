@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Ipersonas, Result } from '../../interfaces/IPersonas';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { ServicioDeBuscarService } from '../../services/servicio-de-buscar.service';
 
 
 @Component({
@@ -22,15 +23,20 @@ export class HomeComponent implements OnInit{
   public selectedPersona: Result | null = null;
   public modalVisible: boolean = false;
   public personaSeleccionadaHome: Result | null = null;
-
-  constructor(private dataService: DataService) {}
+  nomBUscar: string='';
+ 
+  constructor(private dataService: DataService,
+    private servicioDeBuscar: ServicioDeBuscarService ) {}
 
   ngOnInit(): void {
     this.dataService.getPersonas().subscribe( persona => {
       //this.personas = persona
       this.personas = persona.results.map(datos => datos);
       console.log(this.personas);
+      
     });
+
+    this.buscar();
   }
 
   cambiarPagina(pag: number){
@@ -55,6 +61,17 @@ export class HomeComponent implements OnInit{
  
   abrirModal(persona: Result): void {
     this.personaSeleccionadaHome = persona;
+  }
+
+  buscar(){
+    
+    this.servicioDeBuscar.DisparadorDeBuscar.subscribe(data => {
+      const  {datasss} = data;
+      this.dataService.getPersonasPorNombres(datasss).subscribe(per => {
+        this.personas = per.results;
+      })
+      //console.log('Recibiendo data...', datasss);
+    })
   }
 
 }
